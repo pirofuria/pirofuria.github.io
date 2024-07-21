@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Display PDF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyświetlanie PDF z PDF.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <style>
+        #pdfViewer {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+    </style>
 </head>
 <body>
-    <iframe src="abc.pdf" width="100%" height="600px"></iframe>
+    <h1>Wyświetlanie pliku PDF za pomocą PDF.js</h1>
+    <div id="pdfViewer"></div>
+
+    <script>
+        var url = 'abc.pdf';
+
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
+
+        var pdfViewer = document.getElementById('pdfViewer');
+
+        pdfjsLib.getDocument(url).promise.then(function(pdf) {
+            for (var i = 1; i <= pdf.numPages; i++) {
+                pdf.getPage(i).then(function(page) {
+                    var scale = 1.5;
+                    var viewport = page.getViewport({scale: scale});
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext).promise.then(function() {
+                        pdfViewer.appendChild(canvas);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
