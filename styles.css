@@ -1,0 +1,209 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 0;
+    position: relative;
+}
+
+.header-content {
+    background: url('/background.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.header-content h1 {
+    font-family: monospace;
+    margin: 0;
+    font-size: 5em;
+    color: white;
+    text-shadow:  2px 2px 0 black, 
+                -2px -2px 0 black, 
+                2px -2px 0 black, 
+                -2px 2px 0 black,
+                2px 0 0 black,
+                -2px 0 0 black,
+                0 2px 0 black,
+                0 -2px 0 black;
+}
+
+nav {
+    background-color: black;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    background-color: #002244;
+    margin: 0;
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    background-color: #003366;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main {
+    padding: 20px 0;
+}
+
+section {
+    padding: 40px 0;
+    border-bottom: 1px solid #000;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+#search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #search-results {
+            margin-top: 20px;
+        }
+
+        .article {
+            border-bottom: 1px solid #000;
+            padding: 10px 0;
+        }
+
+h2 {
+    color: #003366;
+    font-size: 2em;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.stylish-button { 
+        background-color: #002244; 
+        color: white; 
+        padding: 15px 25px; 
+        text-align: center;
+        font-size: 16px; border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+        } 
+      .stylish-button:hover { 
+        background-color: #0056b3; 
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+      }
+
+note {
+        font-family: 'Aptos', sans-serif;
+        margin: 14;
+        padding: 0;
+        background-color: #f0f8ff;
+        color: red;
+}
+
+.dekryptor {
+    margin: 14px;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#firecracker-container {
+    position: relative;
+    justify-content: center;
+    display: flex;
+}
+
+#firecracker {
+    width: 100px; /* dostosuj rozmiar do swoich potrzeb */
+    height: 100px; /* dostosuj rozmiar do swoich potrzeb */
+    cursor: pointer;
+    justify-content: center;
+    padding: 15px
+}
+
+/* Styl linku do najnowszego artykułu */ 
+#latest-article a { 
+    color: #FF8C00; /* Kolor linku */ 
+    text-decoration: none; /* Usuwa podkreślenie */ 
+    font-weight: bold; /* Pogrubienie */ 
+} 
+/* Styl linku po najechaniu */ 
+#latest-article a:hover { 
+    color: #FF4500; /* Kolor linku po najechaniu */ 
+    text-decoration: underline; /* Podkreślenie po najechaniu */ 
+}
+
+.article-container {
+    position: relative;
+    justify-content: center;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .header-content {
+        padding: 30px 0;
+    }
+
+    .header-content h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+}

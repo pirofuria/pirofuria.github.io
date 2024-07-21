@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="piro, chemia, petardy, bomby, rakiety, wybuchy">
+    <title>PIROFURIA</title>
+    <link rel="stylesheet" href="styles.css">
+    <script async data-id="101458905" src="//static.getclicky.com/js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>PiroFuria</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Menu</a></li>
+                    <li><a href="articles/articles.html">Artykuły</a></li>
+                    <li><a href="tools/tools.html">Narzędzia</a></li>
+                    <li><a href="contact/contact.html">Kontakt</a></li>
+                    <li><a href="secret/secret.html">Tajne</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="menu">
+            <div class="container">
+                <h2>PiroFuria</h2>
+                <p>Witamy na stronie! Jeśli jara cię pirotechnika, to dobrze trafiłeś! Znajdziesz tu wiele przydatnych informacji - od budowy rakiet do wytwarzania m.w.</p>
+            </div>
+        </section>
+
+        <section id="articles">
+            <div class="container">
+                <h2>Artykuły</h2>
+                <p>Przeczytaj najnowsze artykuły z różnych kategorii. Ta sekcja jest na bieżąco uzupełniana.</p>
+                <p><b>Najnowszy artykuł:</b></p>
+                <div id="latest-article" style="text-align: center;"></div>
+            </div>
+        </section>
+
+        <section id="tools">
+            <div class="container">
+                <h2>Narzędzia</h2>
+                <p>Skorzystaj z narzędzi, które pomogą Ci w pracy, takich jak układ okresowy pierwiastków chemicznych.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Kontakt</h2>
+                <p>Masz pytania? Skontaktuj się z nami.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+            <h2>Kliknij!</h2>
+         <div id="firecracker-container">
+        <img id="firecracker" src="explosion/button.svg" alt="Wystrzel Petardę">
+        </div>
+        
+    <audio id="explosion-sound" src="explosion/explosion.mp3" preload="auto"></audio>
+
+    <script src="explosion/script.js"></script>
+            </div>
+        </section>
+    </main>
+    <script>
+        // Funkcja do załadowania i przetworzenia pliku JSON
+        async function fetchLatestArticle() {
+            try {
+                const response = await fetch('articles/articles.json');
+                const articles = await response.json();
+
+                // Sortowanie artykułów według daty w malejącej kolejności
+                articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Pobranie najnowszego artykułu
+                const latestArticle = articles[0];
+
+                // Generowanie linku do najnowszego artykułu
+                const latestArticleDiv = document.getElementById('latest-article');
+                latestArticleDiv.innerHTML = `<a href="articles/${latestArticle.link}">${latestArticle.title}</a>`;
+            } catch (error) {
+                console.error('Błąd podczas ładowania artykułów:', error);
+            }
+        }
+
+        // Wywołanie funkcji po załadowaniu strony
+        window.onload = fetchLatestArticle;
+    </script>
+</body>
+</html>

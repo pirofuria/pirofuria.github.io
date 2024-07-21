@@ -1,2 +1,2 @@
 # pirofuria.github.io
-Pirochemia!!!
+Polska strona o pirotechnice i chemii
