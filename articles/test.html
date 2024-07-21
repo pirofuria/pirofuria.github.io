@@ -4,56 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wyświetlanie PDF z PDF.js</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <style>
         #pdfViewer {
             width: 100%;
             border: 1px solid #ccc;
             overflow: auto;
         }
+
+        .page-separator {
+            height: 2px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
         canvas {
             display: block;
             margin: 10px auto;
+            max-width: 100%;
+        }
+
+        #passwordSection {
+            text-align: center;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Wyświetlanie pliku PDF za pomocą PDF.js</h1>
-    <div id="pdfViewer"></div>
-
+    <div id="passwordSection">
+        <input type="password" id="password" placeholder="Wprowadź hasło">
+        <button id="unlockButton">Odszyfruj i Wyświetl PDF</button>
+    </div>
+    <div id="pdfViewer" data-pdf-url="abc.pdf.encrypted" style="display: none;"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
-        var url = 'abc.pdf';
+        document.getElementById('unlockButton').addEventListener('click', function() {
+            var password = document.getElementById('password').value;
+            var pdfViewer = document.getElementById('pdfViewer');
+            var url = pdfViewer.getAttribute('data-pdf-url');
 
-        var pdfjsLib = window['pdfjs-dist/build/pdf'];
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
+            // Funkcja odszyfrowująca plik
+            function decryptPdf(url, password) {
+                return fetch(url)
+                    .then(response => response.text())
+                    .then(encryptedContent => {
+                        // Odszyfrowanie zawartości
+                        var decrypted = CryptoJS.AES.decrypt(encryptedContent, password);
+                        var decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
 
-        var pdfViewer = document.getElementById('pdfViewer');
-
-        pdfjsLib.getDocument(url).promise.then(function(pdf) {
-            var pages = [];
-            for (var i = 1; i <= pdf.numPages; i++) {
-                pages.push(i);
-            }
-            pages.reduce(function(promise, pageNumber) {
-                return promise.then(function() {
-                    return pdf.getPage(pageNumber).then(function(page) {
-                        var viewport = page.getViewport({scale: 1.5});
-                        var canvas = document.createElement('canvas');
-                        var context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        canvas.style.maxWidth = '100%';
-
-                        var renderContext = {
-                            canvasContext: context,
-                            viewport: viewport
-                        };
-                        return page.render(renderContext).promise.then(function() {
-                            pdfViewer.appendChild(canvas);
-                        });
+                        // Konwersja z powrotem do ArrayBuffer
+                        var binaryString = atob(decryptedStr);
+                        var len = binaryString.length;
+                        var bytes = new Uint8Array(len);
+                        for (var i = 0; i < len; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        return bytes.buffer;
                     });
+            }
+
+            decryptPdf(url, password).then(function(decryptedBuffer) {
+                var loadingTask = pdfjsLib.getDocument({data: decryptedBuffer});
+                
+                loadingTask.promise.then(function(pdf) {
+                    pdfViewer.style.display = 'block';
+                    document.getElementById('passwordSection').style.display = 'none';
+
+                    var pages = [];
+                    for (var i = 1; i <= pdf.numPages; i++) {
+                        pages.push(i);
+                    }
+                    pages.reduce(function(promise, pageNumber) {
+                        return promise.then(function() {
+                            return pdf.getPage(pageNumber).then(function(page) {
+                                var viewport = page.getViewport({scale: 1.5});
+                                var canvas = document.createElement('canvas');
+                                var context = canvas.getContext('2d');
+                                canvas.height = viewport.height;
+                                canvas.width = viewport.width;
+
+                                var renderContext = {
+                                    canvasContext: context,
+                                    viewport: viewport
+                                };
+                                return page.render(renderContext).promise.then(function() {
+                                    pdfViewer.appendChild(canvas);
+                                    if (pageNumber < pdf.numPages) {
+                                        var separator = document.createElement('div');
+                                        separator.className = 'page-separator';
+                                        pdfViewer.appendChild(separator);
+                                    }
+                                });
+                            });
+                        });
+                    }, Promise.resolve());
                 });
-            }, Promise.resolve());
+            }).catch(function(error) {
+                console.error('Błąd odszyfrowania:', error);
+            });
         });
     </script>
 </body>
