@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Układ Okresowy Pierwiastków</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(18, 20px);
+            gap: 2px;
+            justify-content: center;
+        }
+        .element {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 12px;
+        }
+        .element:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .empty {
+            background-color: transparent;
+            border: none;
+            cursor: default;
+        }
+        .details {
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .details-header {
+        display: grid;
+        grid-template-columns: auto max-content;
+        align-items: center;
+        gap: 10px;
+        }
+
+        /* Kolory dla różnych typów pierwiastków */
+        /* Niemetale - zielony */
+        .non-metal {
+            background-color: #9ACD32;
+        }
+
+        /* Metale alkaliczne - czerwony */
+        .alkali-metal {
+            background-color: #FF6347;
+        }
+        
+        /* Metale ziem alkalicznych - pomarańczowy */
+        .alkaline-earth-metal {
+            background-color: #FFA500;
+        }
+
+        /* Metale przejściowe - niebieski */
+        .transition-metal {
+            background-color: #1E90FF;
+        }
+
+        /* Fluorowce - żółty */
+        .halogen {
+            background-color: #FFD700;
+        }
+
+        /* Gazy szlachetne - jasnoniebieski */
+        .noble-gas {
+            background-color: #87CEEB;
+        }
+
+        /* Półmetale - brązowy */
+        .metalloid {
+            background-color: #CD853F;
+        }
+
+        /* Metale bloku P - różowy */
+        .post-transition-metal {
+            background-color: #FF69B4;
+        }
+        
+        /* lantanowce - granatowy */
+        .lanthanoid {
+            background-color: #000080;
+            color: #FFF; /* Dodatkowy styl koloru czcionki */
+        }
+        
+        /* aktynowce - fioletowy */
+        .actinoid {
+            background-color: #800080;
+            color: #FFF; /* Dodatkowy styl koloru czcionki */ 
+        }
+    </style>
+</head>
+<body>
+
+<h1>Układ Okresowy Pierwiastków</h1>
+<div class="periodic-table">
+    <!-- Row 1 -->
+    <div class="element non-metal" onclick="showDetails('H')">H</div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="element noble-gas" onclick="showDetails('He')">He</div>
+    
+    <!-- Row 2 -->
+    <div class="element alkali-metal" onclick="showDetails('Li')">Li</div>
+    <div class="element alkaline-earth-metal" onclick="showDetails('Be')">Be</div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="element metalloid" onclick="showDetails('B')">B</div>
+    <div class="element non-metal" onclick="showDetails('C')">C</div>
+    <div class="element non-metal" onclick="showDetails('N')">N</div>
+    <div class="element non-metal" onclick="showDetails('O')">O</div>
+    <div class="element halogen" onclick="showDetails('F')">F</div>
+    <div class="element noble-gas" onclick="showDetails('Ne')">Ne</div>
+    
+    <!-- Row 3 -->
+    <div class="element alkali-metal" onclick="showDetails('Na')">Na</div>
+    <div class="element alkaline-earth-metal" onclick="showDetails('Mg')">Mg</div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="element post-transition-metal" onclick="showDetails('Al')">Al</div>
+    <div class="element metalloid" onclick="showDetails('Si')">Si</div>
+    <div class="element non-metal" onclick="showDetails('P')">P</div>
+    <div class="element non-metal" onclick="showDetails('S')">S</div>
+    <div class="element halogen" onclick="showDetails('Cl')">Cl</div>
+    <div class="element noble-gas" onclick="showDetails('Ar')">Ar</div>
+    
+    <!-- Row 4 -->
+<div class="element alkali-metal" onclick="showDetails('K')">K</div> <!-- Potas -->
+<div class="element alkaline-earth-metal" onclick="showDetails('Ca')">Ca</div> <!-- Wapń -->
+<div class="element transition-metal" onclick="showDetails('Sc')">Sc</div>
+<div class="element transition-metal" onclick="showDetails('Ti')">Ti</div>
+<div class="element transition-metal" onclick="showDetails('V')">V</div>
+<div class="element transition-metal" onclick="showDetails('Cr')">Cr</div>
+<div class="element transition-metal" onclick="showDetails('Mn')">Mn</div>
+<div class="element transition-metal" onclick="showDetails('Fe')">Fe</div>
+<div class="element transition-metal" onclick="showDetails('Co')">Co</div>
+<div class="element transition-metal" onclick="showDetails('Ni')">Ni</div>
+<div class="element transition-metal" onclick="showDetails('Cu')">Cu</div>
+<div class="element transition-metal" onclick="showDetails('Zn')">Zn</div>
+<div class="element post-transition-metal" onclick="showDetails('Ga')">Ga</div>
+<div class="element metalloid" onclick="showDetails('Ge')">Ge</div>
+<div class="element non-metal" onclick="showDetails('As')">As</div>
+<div class="element non-metal" onclick="showDetails('Se')">Se</div>
+<div class="element halogen" onclick="showDetails('Br')">Br</div>
+<div class="element noble-gas" onclick="showDetails('Kr')">Kr</div>
+
+<!-- Row 5 -->
+<div class="element alkali-metal" onclick="showDetails('Rb')">Rb</div>
+<div class="element alkaline-earth-metal" onclick="showDetails('Sr')">Sr</div>
+<div class="element transition-metal" onclick="showDetails('Y')">Y</div>
+<div class="element transition-metal" onclick="showDetails('Zr')">Zr</div>
+<div class="element transition-metal" onclick="showDetails('Nb')">Nb</div>
+<div class="element transition-metal" onclick="showDetails('Mo')">Mo</div>
+<div class="element transition-metal" onclick="showDetails('Tc')">Tc</div>
+<div class="element transition-metal" onclick="showDetails('Ru')">Ru</div>
+<div class="element transition-metal" onclick="showDetails('Rh')">Rh</div>
+<div class="element transition-metal" onclick="showDetails('Pd')">Pd</div>
+<div class="element transition-metal" onclick="showDetails('Ag')">Ag</div>
+<div class="element transition-metal" onclick="showDetails('Cd')">Cd</div>
+<div class="element post-transition-metal" onclick="showDetails('In')">In</div>
+<div class="element post-transition-metal" onclick="showDetails('Sn')">Sn</div>
+<div class="element metalloid" onclick="showDetails('Sb')">Sb</div>
+<div class="element metalloid" onclick="showDetails('Te')">Te</div>
+<div class="element halogen" onclick="showDetails('I')">I</div>
+<div class="element noble-gas" onclick="showDetails('Xe')">Xe</div>
+
+<!-- Row 6 -->
+<div class="element alkali-metal" onclick="showDetails('Cs')">Cs</div>
+<div class="element alkaline-earth-metal" onclick="showDetails('Ba')">Ba</div>
+<div class="element lanthanoid" onclick="showDetails('LANTANOWCE')"></div>
+<div class="element transition-metal" onclick="showDetails('Hf')">Hf</div>
+<div class="element transition-metal" onclick="showDetails('Ta')">Ta</div>
+<div class="element transition-metal" onclick="showDetails('W')">W</div>
+<div class="element transition-metal" onclick="showDetails('Re')">Re</div>
+<div class="element transition-metal" onclick="showDetails('Os')">Os</div>
+<div class="element transition-metal" onclick="showDetails('Ir')">Ir</div>
+<div class="element transition-metal" onclick="showDetails('Pt')">Pt</div>
+<div class="element transition-metal" onclick="showDetails('Au')">Au</div>
+<div class="element transition-metal" onclick="showDetails('Hg')">Hg</div>
+<div class="element post-transition-metal" onclick="showDetails('Tl')">Tl</div>
+<div class="element post-transition-metal" onclick="showDetails('Pb')">Pb</div>
+<div class="element post-transition-metal" onclick="showDetails('Bi')">Bi</div>
+<div class="element post-transition-metal" onclick="showDetails('Po')">Po</div>
+<div class="element halogen" onclick="showDetails('At')">At</div>
+<div class="element noble-gas" onclick="showDetails('Rn')">Rn</div>
+
+<!-- Row 7 -->
+<div class="element alkali-metal" onclick="showDetails('Fr')">Fr</div>
+<div class="element alkaline-earth-metal" onclick="showDetails('Ra')">Ra</div>
+<div class="element actinoid" onclick="showDetails('AKTYNOWCE')"></div>
+<div class="element transition-metal" onclick="showDetails('Rf')">Rf</div>
+<div class="element transition-metal" onclick="showDetails('Db')">Db</div>
+<div class="element transition-metal" onclick="showDetails('Sg')">Sg</div>
+<div class="element transition-metal" onclick="showDetails('Bh')">Bh</div>
+<div class="element transition-metal" onclick="showDetails('Hs')">Hs</div>
+<div class="element transition-metal" onclick="showDetails('Mt')">Mt</div>
+<div class="element transition-metal" onclick="showDetails('Ds')">Ds</div>
+<div class="element transition-metal" onclick="showDetails('Rg')">Rg</div>
+<div class="element transition-metal" onclick="showDetails('Cn')">Cn</div>
+<div class="element" onclick="showDetails('Nh')">Nh</div>
+<div class="element" onclick="showDetails('Fl')">Fl</div>
+<div class="element" onclick="showDetails('Mc')">Mc</div>
+<div class="element" onclick="showDetails('Lv')">Lv</div>
+<div class="element" onclick="showDetails('Ts')">Ts</div>
+<div class="element" onclick="showDetails('Og')">Og</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="empty"></div>
+<!-- Lantanowce -->
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="element lanthanoid" onclick="showDetails('La')">La</div>
+<div class="element lanthanoid" onclick="showDetails('Ce')">Ce</div>
+<div class="element lanthanoid" onclick="showDetails('Pr')">Pr</div>
+<div class="element lanthanoid" onclick="showDetails('Nd')">Nd</div>
+<div class="element lanthanoid" onclick="showDetails('Pm')">Pm</div>
+<div class="element lanthanoid" onclick="showDetails('Sm')">Sm</div>
+<div class="element lanthanoid" onclick="showDetails('Eu')">Eu</div>
+<div class="element lanthanoid" onclick="showDetails('Gd')">Gd</div>
+<div class="element lanthanoid" onclick="showDetails('Tb')">Tb</div>
+<div class="element lanthanoid" onclick="showDetails('Dy')">Dy</div>
+<div class="element lanthanoid" onclick="showDetails('Ho')">Ho</div>
+<div class="element lanthanoid" onclick="showDetails('Er')">Er</div>
+<div class="element lanthanoid" onclick="showDetails('Tm')">Tm</div>
+<div class="element lanthanoid" onclick="showDetails('Yb')">Yb</div>
+<div class="element lanthanoid" onclick="showDetails('Lu')">Lu</div>
+<div class="empty"></div>
+<!-- Aktynowce -->
+<div class="empty"></div>
+<div class="empty"></div>
+<div class="element actinoid" onclick="showDetails('Ac')">Ac</div>
+<div class="element actinoid" onclick="showDetails('Th')">Th</div>
+<div class="element actinoid" onclick="showDetails('Pa')">Pa</div>
+<div class="element actinoid" onclick="showDetails('U')">U</div>
+<div class="element actinoid" onclick="showDetails('Np')">Np</div>
+<div class="element actinoid" onclick="showDetails('Pu')">Pu</div>
+<div class="element actinoid" onclick="showDetails('Am')">Am</div>
+<div class="element actinoid" onclick="showDetails('Cm')">Cm</div>
+<div class="element actinoid" onclick="showDetails('Bk')">Bk</div>
+<div class="element actinoid" onclick="showDetails('Cf')">Cf</div>
+<div class="element actinoid" onclick="showDetails('Es')">Es</div>
+<div class="element actinoid" onclick="showDetails('Fm')">Fm</div>
+<div class="element actinoid" onclick="showDetails('Md')">Md</div>
+<div class="element actinoid" onclick="showDetails('No')">No</div>
+<div class="element actinoid" onclick="showDetails('Lr')">Lr</div>
+    <!-- Dodaj więcej wierszy i pierwiastków według potrzeb -->
+</div>
+
+<div class="details" id="details">
+	<div class="details-header">
+    <h2>Szczegóły pierwiastka</h2>
+    <div id="radioactive-symbol"  style="display: none; font-size: 24px;">☢️</div>
+    </div>
+    <p><strong>Nazwa:</strong> <span id="name"></span></p>
+    <p><strong>Liczba atomowa:</strong> <span id="atomicNumber"></span></p>
+    <p><strong>Masa atomowa:</strong> <span id="mass"></span></p>
+    <p><strong>Elektroujemność:</strong> <span id="electronegativity"></span></p>
+    <p><strong>Występowanie w przyrodzie:</strong> <span id="occurrence"></span></p>
+    <p><strong>Stan skupienia:</strong> <span id="state"></span></p>
+    <p><strong>Temperatura topnienia:</strong> <span id="meltingPoint"></span></p>
+    <p><strong>Temperatura wrzenia:</strong> <span id="boilingPoint"></span></p>
+    <p><strong>Rok odkrycia:</strong> <span id="discoveryYear"></span></p>
+    <p><strong>Ciekawostka:</strong> <span id="fact"></span></p>
+</div>
+
+<div class="details" id="details">
+    <h2>Legenda</h2>
+    <p style="color: #9ACD32;"><strong>■</strong> - Niemetale</p>
+    <p style="color: #FF6347;"><strong>■</strong> - Metale alkaliczne</p>
+    <p style="color: #FFA500;"><strong>■</strong> - Metale ziem alklicznych</p>
+    <p style="color: #1E90FF;"><strong>■</strong> - Metale przejściowe</p>
+    <p style="color: #CD853F;"><strong>■</strong> - Półmetale</p>
+    <p style="color: #FF69B4;"><strong>■</strong> - Metale bloku P</p>
+    <p style="color: #FFD700;"><strong>■</strong> - Halogeny</p>
+    <p style="color: #87CEEB;"><strong>■</strong> - Gazy szlachetne</p>
+    <p style="color: #000080;"><strong>■</strong> - Lantanowce</p>
+    <p style="color: #800080;"><strong>■</strong> - Aktynowce</p>
+</div>
+
+<script>
+    const elements = {
+        "H": {
+            mass: "1.008 u",
+            electronegativity: "2.20",
+            occurrence: "Wszechobecny",
+            state: "Gaz",
+            meltingPoint: "-259.14 °C",
+            boilingPoint: "-252.87 °C",
+            discoveryYear: "1766",
+            fact: "Najbardziej rozpowszechniony pierwiastek we wszechświecie."
+        },
+        "He": {
+            mass: "4.0026 u",
+            electronegativity: "nie dotyczy",
+            occurrence: "Bardzo rzadki na Ziemi, obfity w kosmosie",
+            state: "Gaz",
+            meltingPoint: "nie topi się w normalnych warunkach",
+            boilingPoint: "-268.93 °C",
+            discoveryYear: "1895",
+            fact: "Drugie najczęściej występujące pierwiastki we wszechświecie."
+        },
+        "Li": {
+            mass: "6.94 u",
+            electronegativity: "0.98",
+            occurrence: "W skorupie ziemskiej",
+            state: "Ciało stałe",
+            meltingPoint: "180.5 °C",
+            boilingPoint: "1342 °C",
+            discoveryYear: "1817",
+            fact: "Stosowany w bateriach litowo-jonowych."
+        },
+        "Be": {
+            mass: "9.0122 u",
+            electronegativity: "1.57",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1287 °C",
+            boilingPoint: "2469 °C",
+            discoveryYear: "1798",
+            fact: "Stosowany w przemyśle lotniczym ze względu na swoją lekkość i wytrzymałość."
+        },
+        "B": {
+            mass: "10.81 u",
+            electronegativity: "2.04",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "2075 °C",
+            boilingPoint: "4000 °C",
+            discoveryYear: "1808",
+            fact: "Stosowany w produkcji szkła borokrzemianowego."
+        },
+        "C": {
+            mass: "12.011 u",
+            electronegativity: "2.55",
+            occurrence: "Wszechobecny",
+            state: "Ciało stałe",
+            meltingPoint: "sublimacja w 3915 °C",
+            boilingPoint: "sublimacja w 3915 °C",
+            discoveryYear: "Nieznany",
+            fact: "Podstawowy składnik wszystkich znanych form życia."
+        },
+        "N": {
+            mass: "14.007 u",
+            electronegativity: "3.04",
+            occurrence: "Wszechobecny",
+            state: "Gaz",
+            meltingPoint: "-210.00 °C",
+            boilingPoint: "-195.79 °C",
+            discoveryYear: "1772",
+            fact: "Stanowi około 78% objętości powietrza atmosferycznego."
+        },
+        "O": {
+            mass: "15.999 u",
+            electronegativity: "3.44",
+            occurrence: "Wszechobecny",
+            state: "Gaz",
+            meltingPoint: "-218.79 °C",
+            boilingPoint: "-182.96 °C",
+            discoveryYear: "1774",
+            fact: "Najbardziej rozpowszechniony pierwiastek w skorupie ziemskiej."
+        },
+        "F": {
+            mass: "18.998 u",
+            electronegativity: "3.98",
+            occurrence: "Rzadki",
+            state: "Gaz",
+            meltingPoint: "-219.67 °C",
+            boilingPoint: "-188.11 °C",
+            discoveryYear: "1886",
+            fact: "Najbardziej elektroujemny pierwiastek."
+        },
+        "Ne": {
+            mass: "20.180 u",
+            electronegativity: "nie dotyczy",
+            occurrence: "Rzadki",
+            state: "Gaz",
+            meltingPoint: "-248.59 °C",
+            boilingPoint: "-246.08 °C",
+            discoveryYear: "1898",
+            fact: "Używany w neonowych znakach reklamowych."
+        },
+        "Na": {
+            mass: "22.990 u",
+            electronegativity: "0.93",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "97.72 °C",
+            boilingPoint: "883 °C",
+            discoveryYear: "1807",
+            fact: "Jest jednym z najważniejszych pierwiastków dla organizmów żywych."
+        },
+           "Mg": {
+            mass: "24.305 u",
+            electronegativity: "1.31",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "650 °C",
+            boilingPoint: "1090 °C",
+            discoveryYear: "1755",
+            fact: "Jest kluczowym składnikiem chlorofilu, niezbędnym do fotosyntezy."
+        },
+        "Al": {
+            mass: "26.982 u",
+            electronegativity: "1.61",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "660.32 °C",
+            boilingPoint: "2470 °C",
+            discoveryYear: "1825",
+            fact: "Jest trzecim najbardziej rozpowszechnionym pierwiastkiem w skorupie ziemskiej."
+        },
+        "Si": {
+            mass: "28.085 u",
+            electronegativity: "1.90",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "1414 °C",
+            boilingPoint: "3265 °C",
+            discoveryYear: "1824",
+            fact: "Jest podstawowym składnikiem piasku i skał krzemianowych."
+        },
+        "P": {
+            mass: "30.974 u",
+            electronegativity: "2.19",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "44.15 °C (biały fosfor)",
+            boilingPoint: "280.5 °C (biały fosfor)",
+            discoveryYear: "1669",
+            fact: "Jest kluczowym składnikiem DNA i ATP, niezbędnym do życia."
+        },
+        "S": {
+            mass: "32.06 u",
+            electronegativity: "2.58",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "115.21 °C",
+            boilingPoint: "444.6 °C",
+            discoveryYear: "Starożytność",
+            fact: "Jest niezbędnym pierwiastkiem dla wszystkich organizmów żywych."
+        },
+        "Cl": {
+            mass: "35.45 u",
+            electronegativity: "3.16",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Gaz",
+            meltingPoint: "-101.5 °C",
+            boilingPoint: "-34.04 °C",
+            discoveryYear: "1774",
+            fact: "Jest głównym składnikiem soli kuchennej (NaCl)."
+        },
+        "Ar": {
+            mass: "39.948 u",
+            electronegativity: "nie dotyczy",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Gaz",
+            meltingPoint: "-189.34 °C",
+            boilingPoint: "-185.84 °C",
+            discoveryYear: "1894",
+            fact: "Jest trzecim najbardziej rozpowszechnionym gazem w atmosferze ziemskiej."
+        },
+    "K": {
+        mass: "39.098 u",
+        electronegativity: "0.82",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "63.38 °C",
+        boilingPoint: "759 °C",
+        discoveryYear: "1807",
+        fact: "Jest jednym z najważniejszych pierwiastków dla organizmów żywych."
+    },
+    "Ca": {
+        mass: "40.078 u",
+        electronegativity: "1.00",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "842 °C",
+        boilingPoint: "1484 °C",
+        discoveryYear: "1808",
+        fact: "Główny składnik kości i zębów."
+    },
+    "Sc": {
+        mass: "44.956 u",
+        electronegativity: "1.36",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1541 °C",
+        boilingPoint: "2836 °C",
+        discoveryYear: "1879",
+        fact: "Jest stosowany w produkcji stopów, w tym także aluminium."
+    },
+    "Ti": {
+        mass: "47.867 u",
+        electronegativity: "1.54",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1668 °C",
+        boilingPoint: "3287 °C",
+        discoveryYear: "1791",
+        fact: "Jest wykorzystywany w przemyśle lotniczym, medycznym i chemicznym."
+    },
+    "V": {
+        mass: "50.942 u",
+        electronegativity: "1.63",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1910 °C",
+        boilingPoint: "3407 °C",
+        discoveryYear: "1801",
+        fact: "Jest stosowany w stopach używanych w produkcji narzędzi."
+    },
+    "Cr": {
+        mass: "51.996 u",
+        electronegativity: "1.66",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "1907 °C",
+        boilingPoint: "2671 °C",
+        discoveryYear: "1797",
+        fact: "Jego związki są stosowane w przemyśle chemicznym i metalurgicznym."
+    },
+    "Mn": {
+        mass: "54.938 u",
+        electronegativity: "1.55",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "1246 °C",
+        boilingPoint: "2061 °C",
+        discoveryYear: "1774",
+        fact: "Jest kluczowym składnikiem stali nierdzewnej."
+    },
+    "Fe": {
+        mass: "55.845 u",
+        electronegativity: "1.83",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "1538 °C",
+        boilingPoint: "2861 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest kluczowym składnikiem hemoglobiny i mioglobiny."
+    },
+    "Co": {
+        mass: "58.933 u",
+        electronegativity: "1.88",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1495 °C",
+        boilingPoint: "2927 °C",
+        discoveryYear: "1735",
+        fact: "Jest stosowany w produkcji magnesów trwałych."
+    },
+    "Ni": {
+        mass: "58.693 u",
+        electronegativity: "1.91",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "1455 °C",
+        boilingPoint: "2913 °C",
+        discoveryYear: "1751",
+        fact: "Jest kluczowym składnikiem stopów nierdzewnych i superstopów."
+    },
+    "Cu": {
+        mass: "63.546 u",
+        electronegativity: "1.90",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "1084.62 °C",
+        boilingPoint: "2562 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest wykorzystywany od starożytności jako materiał budowlany i elektryczny."
+    },
+    "Zn": {
+        mass: "65.38 u",
+        electronegativity: "1.65",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "419.53 °C",
+        boilingPoint: "907 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest kluczowym składnikiem ocynku, stosowanego w metalurgii i przemyśle chemicznym."
+    },
+    "Ga": {
+        mass: "69.723 u",
+        electronegativity: "1.81",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "29.76 °C",
+        boilingPoint: "2204 °C",
+        discoveryYear: "1875",
+        fact: "Jest wykorzystywany w produkcji półprzewodników i innych zaawansowanych technologii."
+    },
+    "Ge": {
+        mass: "72.63 u",
+        electronegativity: "2.01",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "938.25 °C",
+        boilingPoint: "2830 °C",
+        discoveryYear: "1886",
+        fact: "Jest stosowany w produkcji półprzewodników i optyki."
+    },
+    "As": {
+        mass: "74.922 u",
+        electronegativity: "2.18",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "816.8 °C",
+        boilingPoint: "613 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest wykorzystywany w produkcji pestycydów i leków."
+    },
+    "Se": {
+        mass: "78.971 u",
+        electronegativity: "2.55",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "221 °C",
+        boilingPoint: "685 °C",
+        discoveryYear: "1817",
+        fact: "Jest niezbędny dla zdrowia, działa jako przeciwutleniacz."
+    },
+    "Br": {
+        mass: "79.904 u",
+        electronegativity: "2.96",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "-7.2 °C",
+        boilingPoint: "58.8 °C",
+        discoveryYear: "1826",
+        fact: "Jest stosowany w produkcji leków i środków ochrony roślin."
+    },
+    "Kr": {
+        mass: "83.798 u",
+        electronegativity: "nie dotyczy",
+        occurrence: "Rzadki",
+        state: "Gaz",
+        meltingPoint: "-157.36 °C",
+        boilingPoint: "-153.22 °C",
+        discoveryYear: "1898",
+        fact: "Jest używany w lampach wyładowczych i innych technologiach oświetleniowych."
+    },
+        "Rb": {
+            mass: "85.4678 u",
+            electronegativity: "0.82",
+            occurrence: "Szeroko rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "38.89 °C",
+            boilingPoint: "688 °C",
+            discoveryYear: "1861",
+            fact: "Jest jednym z najbardziej reaktywnych metalów ziem alkalicznych."
+        },
+        "Sr": {
+            mass: "87.62 u",
+            electronegativity: "0.95",
+            occurrence: "Bardzo rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "769 °C",
+            boilingPoint: "1384 °C",
+            discoveryYear: "1798",
+            fact: "Stosowany w produkcji ogniwa wyładowczego i pirotechniki."
+        },
+        "Y": {
+            mass: "88.905 u",
+            electronegativity: "1.22",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1522 °C",
+            boilingPoint: "3338 °C",
+            discoveryYear: "1794",
+            fact: "Stosowany w produkcji laserów i materiałów ceramicznych."
+        },
+        "Zr": {
+            mass: "91.224 u",
+            electronegativity: "1.33",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1855 °C",
+            boilingPoint: "4409 °C",
+            discoveryYear: "1789",
+            fact: "Stosowany w produkcji stopów odpornych na korozję i reaktory jądrowe."
+        },
+        "Nb": {
+            mass: "92.906 u",
+            electronegativity: "1.6",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "2468 °C",
+            boilingPoint: "4742 °C",
+            discoveryYear: "1801",
+            fact: "Stosowany w produkcji stopów stosowanych w lotnictwie i przemyśle chemicznym."
+        },
+        "Mo": {
+            mass: "95.95 u",
+            electronegativity: "2.16",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "2623 °C",
+            boilingPoint: "4639 °C",
+            discoveryYear: "1781",
+            fact: "Stosowany w produkcji stopów stalowych i materiałów o wysokiej wytrzymałości."
+        },
+        "Tc": {
+            mass: "98 u",
+            electronegativity: "1.9",
+            occurrence: "Sztuczny, produkowany w reaktorach jądrowych",
+            state: "Ciało stałe",
+            meltingPoint: "2172 °C",
+            boilingPoint: "5030 °C",
+            discoveryYear: "1937",
+            fact: "Pierwszy pierwiastek syntetyczny odkryty w laboratorium."
+        },
+        "Ru": {
+            mass: "101.07 u",
+            electronegativity: "2.2",
+            occurrence: "Szeroko rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "2334 °C",
+            boilingPoint: "4150 °C",
+            discoveryYear: "1844",
+            fact: "Jest jednym z najtrwalszych i najbardziej odpornych na korozję pierwiastków."
+        },
+        "Rh": {
+            mass: "102.905 u",
+            electronegativity: "2.28",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1964 °C",
+            boilingPoint: "3695 °C",
+            discoveryYear: "1803",
+            fact: "Stosowany w katalizatorach i urządzeniach detekcyjnych."
+        },
+        "Pd": {
+            mass: "106.42 u",
+            electronegativity: "2.2",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1554.9 °C",
+            boilingPoint: "2963 °C",
+            discoveryYear: "1803",
+            fact: "Stosowany w produkcji katalizatorów, elektroniki i biżuterii."
+        },
+        "Ag": {
+            mass: "107.87 u",
+            electronegativity: "1.93",
+            occurrence: "Szeroko rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "961.8 °C",
+            boilingPoint: "2162 °C",
+            discoveryYear: "Starożytność",
+            fact: "Jest jednym z najstarszych znanych pierwiastków stosowanych przez ludzkość."
+        },
+        "Cd": {
+            mass: "112.41 u",
+            electronegativity: "1.69",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "321.07 °C",
+            boilingPoint: "765 °C",
+            discoveryYear: "1817",
+            fact: "Stosowany w przemyśle elektronicznym i jako ochrona przed korozją."
+        },
+        "In": {
+            mass: "114.82 u",
+            electronegativity: "1.78",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "156.6 °C",
+            boilingPoint: "2080 °C",
+            discoveryYear: "1863",
+            fact: "Stosowany w produkcji półprzewodników i materiałów o wysokiej wytrzymałości."
+        },
+        "Sn": {
+            mass: "118.71 u",
+            electronegativity: "1.96",
+            occurrence: "Szeroko rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "231.93 °C",
+            boilingPoint: "2602 °C",
+            discoveryYear: "Starożytność",
+            fact: "Jest jednym z najstarszych znanych pierwiastków, stosowany w produkcji cyny."
+        },
+        "Sb": {
+            mass: "121.76 u",
+            electronegativity: "2.05",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "630.63 °C",
+            boilingPoint: "1587 °C",
+            discoveryYear: "Starożytność",
+            fact: "Stosowany w produkcji ogniw paliwowych i materiałów o wysokiej wytrzymałości."
+        },
+        "Te": {
+            mass: "127.6 u",
+            electronegativity: "2.1",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "449.51 °C",
+            boilingPoint: "988 °C",
+            discoveryYear: "1782",
+            fact: "Stosowany w produkcji półprzewodników i w technologii informacyjnej."
+        },
+        "I": {
+            mass: "126.9 u",
+            electronegativity: "2.66",
+            occurrence: "Szeroko rozpowszechniony w przyrodzie",
+            state: "Ciało stałe",
+            meltingPoint: "113.7 °C",
+            boilingPoint: "184.3 °C",
+            discoveryYear: "1811",
+            fact: "Stosowany w medycynie jako kontrast w diagnostyce obrazowej."
+        },
+        "Xe": {
+            mass: "131.29 u",
+            electronegativity: "2.6",
+            occurrence: "Rzadki",
+            state: "Gaz",
+            meltingPoint: "-111.75 °C",
+            boilingPoint: "-108.1 °C",
+            discoveryYear: "1898",
+            fact: "Stosowany w lampach rentgenowskich i do badania właściwości materiałów."
+        },
+    // Pierwiastki 6. grupy
+    "Cs": {
+        mass: "132.905 u",
+        electronegativity: "0.79",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "28.5 °C",
+        boilingPoint: "671 °C",
+        discoveryYear: "1860",
+        fact: "Ma najniższe elektroujemność ze wszystkich pierwiastków alkalicznych."
+    },
+    "Ba": {
+        mass: "137.327 u",
+        electronegativity: "0.89",
+        occurrence: "Bardzo rozpowszechniony w przyrodzie",
+        state: "Ciało stałe",
+        meltingPoint: "727 °C",
+        boilingPoint: "1870 °C",
+        discoveryYear: "1808",
+        fact: "Stosowany w produkcji zielonych ogników."
+    },
+    "Hf": {
+        mass: "178.49 u",
+        electronegativity: "1.3",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "2227 °C",
+        boilingPoint: "4603 °C",
+        discoveryYear: "1923",
+        fact: "Jest wysoce odporny na korozję i używany w obróbce cieplnej stopów."
+    },
+    "Ta": {
+        mass: "180.947 u",
+        electronegativity: "1.5",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "3017 °C",
+        boilingPoint: "5458 °C",
+        discoveryYear: "1802",
+        fact: "Jest wyjątkowo odporny na korozję i wykorzystywany w produkcji superstopów."
+    },
+    "W": {
+        mass: "183.84 u",
+        electronegativity: "2.36",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "3422 °C",
+        boilingPoint: "5555 °C",
+        discoveryYear: "1783",
+        fact: "Jest jednym z najcięższych pierwiastków występujących naturalnie."
+    },
+    "Re": {
+        mass: "186.207 u",
+        electronegativity: "1.9",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "3186 °C",
+        boilingPoint: "5596 °C",
+        discoveryYear: "1925",
+        fact: "Posiada jedno z najwyższych temperatur topnienia ze wszystkich pierwiastków."
+    },
+    "Os": {
+        mass: "190.23 u",
+        electronegativity: "2.2",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "3033 °C",
+        boilingPoint: "5012 °C",
+        discoveryYear: "1803",
+        fact: "Jest jednym z najcięższych i najgęstszych pierwiastków w przyrodzie."
+    },
+    "Ir": {
+        mass: "192.217 u",
+        electronegativity: "2.2",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "2446 °C",
+        boilingPoint: "4130 °C",
+        discoveryYear: "1803",
+        fact: "Jest jednym z najbardziej odpornych na korozję pierwiastków."
+    },
+    "Pt": {
+        mass: "195.084 u",
+        electronegativity: "2.28",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1768.3 °C",
+        boilingPoint: "3825 °C",
+        discoveryYear: "1748",
+        fact: "Stosowany w przemyśle chemicznym, elektronicznym i jubilerskim."
+    },
+    "Au": {
+        mass: "196.966 u",
+        electronegativity: "2.54",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "1064.18 °C",
+        boilingPoint: "2970 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest jednym z najbardziej poszukiwanych i cenionych metali szlachetnych."
+    },
+    "Hg": {
+        mass: "200.592 u",
+        electronegativity: "2.00",
+        occurrence: "Rzadki",
+        state: "Ciało stałe (podobno ciekłe)",
+        meltingPoint: "-38.83 °C",
+        boilingPoint: "356.73 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest jedynym metalem, który jest ciekły w temperaturze pokojowej."
+    },
+    "Tl": {
+        mass: "204.38 u",
+        electronegativity: "1.62",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "304 °C",
+        boilingPoint: "1457 °C",
+        discoveryYear: "1861",
+        fact: "Ma jeden z najniższych punktów topnienia spośród metali."
+    },
+    "Pb": {
+        mass: "207.2 u",
+        electronegativity: "2.33",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "327.5 °C",
+        boilingPoint: "1749 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest jednym z najbardziej znanych i długo używanych metali ciężkich."
+    },
+    "Bi": {
+        mass: "208.98 u",
+        electronegativity: "2.02",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "271.3 °C",
+        boilingPoint: "1564 °C",
+        discoveryYear: "Starożytność",
+        fact: "Jest najbardziej radioaktywnym nietrwałym pierwiastkiem w swojej grupie."
+    },
+    "Po": {
+        mass: "209 u",
+        electronegativity: "2.00",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "254 °C",
+        boilingPoint: "962 °C",
+        discoveryYear: "1898",
+        fact: "Jest jednym z najrzadszych i najbardziej radioaktywnych pierwiastków naturalnych."
+    },
+    "At": {
+        mass: "210 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "302 °C",
+        boilingPoint: "337 °C",
+        discoveryYear: "1940",
+        fact: "Jest jednym z najrzadszych pierwiastków na Ziemi."
+    },
+    "Rn": {
+        mass: "222 u",
+        electronegativity: "nie dotyczy",
+        occurrence: "Rzadki",
+        state: "Gaz",
+        meltingPoint: "-71 °C",
+        boilingPoint: "-61.7 °C",
+        discoveryYear: "1900",
+        fact: "Jest jednym z nielicznych pierwiastków, które występują w stanie gazowym w warunkach normalnych."
+    },
+    // Pierwiastki 7. grupy
+    "Fr": {
+        mass: "223 u",
+        electronegativity: "0.7",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "27 °C",
+        boilingPoint: "677 °C",
+        discoveryYear: "1939",
+        fact: "Jest najrzadszym pierwiastkiem alkalicznym."
+    },
+    "Ra": {
+        mass: "226 u",
+        electronegativity: "0.9",
+        occurrence: "Rzadki",
+        state: "Ciało stałe",
+        meltingPoint: "700 °C",
+        boilingPoint: "1737 °C",
+        discoveryYear: "1898",
+        fact: "Jest jednym z najcięższych i najrzadszych pierwiastków ziem alkalicznych."
+    },
+    "Rf": {
+        mass: "261 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1964",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Db": {
+        mass: "262 u",
+        electronegativity: "2.0",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1967",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Sg": {
+        mass: "266 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1974",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Bh": {
+        mass: "264 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1981",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Hs": {
+        mass: "277 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1984",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Mt": {
+        mass: "268 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1982",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Ds": {
+        mass: "271 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1994",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Rg": {
+        mass: "272 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1994",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Cn": {
+        mass: "285 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1996",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Nh": {
+        mass: "286 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "2004",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Fl": {
+        mass: "289 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "1998",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Mc": {
+        mass: "290 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "2003",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Lv": {
+        mass: "293 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "2000",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Ts": {
+        mass: "294 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "2010",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+    "Og": {
+        mass: "294 u",
+        electronegativity: "2.2",
+        occurrence: "Sztuczny",
+        state: "Ciało stałe",
+        meltingPoint: "nieznany",
+        boilingPoint: "nieznany",
+        discoveryYear: "2006",
+        fact: "Jest jednym z najcięższych pierwiastków, którego właściwości są słabo poznane."
+    },
+        "La": {
+            mass: "138.91 u",
+            electronegativity: "1.10",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "920 °C",
+            boilingPoint: "3457 °C",
+            discoveryYear: "1839",
+            fact: "Lantanowce są często używane w produkcji laserów, lamp elektronowych i materiałów ferromagnetycznych."
+        },
+        "Ce": {
+            mass: "140.12 u",
+            electronegativity: "1.12",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "795 °C",
+            boilingPoint: "3443 °C",
+            discoveryYear: "1803",
+            fact: "Cer to jedyny pierwiastek chemiczny, który znajduje zastosowanie w ogniach sztucznych."
+        },
+        "Pr": {
+            mass: "140.91 u",
+            electronegativity: "1.13",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "935 °C",
+            boilingPoint: "3130 °C",
+            discoveryYear: "1885",
+            fact: "Praseodym jest stosowane w okularach ochronnych stosowanych do cięcia i spawania metali."
+        },
+        "Nd": {
+            mass: "144.24 u",
+            electronegativity: "1.14",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1021 °C",
+            boilingPoint: "3074 °C",
+            discoveryYear: "1885",
+            fact: "Neodym jest stosowane do produkcji silnych magnesów stosowanych w silnikach samochodowych."
+        },
+        "Pm": {
+            mass: "(145) u",
+            electronegativity: "1.13",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "1042 °C",
+            boilingPoint: "3000 °C",
+            discoveryYear: "1947",
+            fact: "Promet to jedyny pierwiastek, który występuje wyłącznie w postaci sztucznej."
+        },
+        "Sm": {
+            mass: "150.36 u",
+            electronegativity: "1.17",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1072 °C",
+            boilingPoint: "1900 °C",
+            discoveryYear: "1853",
+            fact: "Samar to jedyny pierwiastek, który ma unikalne właściwości magnetyczne w niskich temperaturach."
+        },
+        "Eu": {
+            mass: "151.96 u",
+            electronegativity: "1.20",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "822 °C",
+            boilingPoint: "1597 °C",
+            discoveryYear: "1901",
+            fact: "Europ to stosowany w produkcji barwników, fluorescencyjnych farb i lamp fluorescencyjnych."
+        },
+        "Gd": {
+            mass: "157.25 u",
+            electronegativity: "1.20",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1311 °C",
+            boilingPoint: "3233 °C",
+            discoveryYear: "1880",
+            fact: "Gadolin to stosowany w produkcji magnesów, głównie w MRI."
+        },
+        "Tb": {
+            mass: "158.93 u",
+            electronegativity: "1.20",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1356 °C",
+            boilingPoint: "3230 °C",
+            discoveryYear: "1843",
+            fact: "Terb to stosowany w produkcji ceramiki, zwłaszcza w materiałach piezoelektrycznych."
+        },
+        "Dy": {
+            mass: "162.50 u",
+            electronegativity: "1.22",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1412 °C",
+            boilingPoint: "2567 °C",
+            discoveryYear: "1886",
+            fact: "Dysproz to stosowany w produkcji magnesów stosowanych w silnikach samolotowych."
+        },
+        "Ho": {
+            mass: "164.93 u",
+            electronegativity: "1.23",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1470 °C",
+            boilingPoint: "2720 °C",
+            discoveryYear: "1878",
+            fact: "Holm to stosowany w produkcji magnesów stosowanych w detektorach metali."
+        },
+        "Er": {
+            mass: "167.26 u",
+            electronegativity: "1.24",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1522 °C",
+            boilingPoint: "2510 °C",
+            discoveryYear: "1843",
+            fact: "Erb to stosowany w produkcji stali nierdzewnych i wzbogacaniu uranu."
+        },
+        "Tm": {
+            mass: "168.93 u",
+            electronegativity: "1.25",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1545 °C",
+            boilingPoint: "1727 °C",
+            discoveryYear: "1879",
+            fact: "Tul to stosowany w produkcji laserów medycznych i chirurgicznych."
+        },
+        "Yb": {
+            mass: "173.04 u",
+            electronegativity: "1.1",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "824 °C",
+            boilingPoint: "1196 °C",
+            discoveryYear: "1878",
+            fact: "Iterb to stosowany w produkcji urządzeń do pomiaru czasu i jako materiał radiacyjny."
+        },
+        "Lu": {
+            mass: "174.97 u",
+            electronegativity: "1.27",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1652 °C",
+            boilingPoint: "3402 °C",
+            discoveryYear: "1907",
+            fact: "Lutet to stosowany w produkcji materiałów wysokotemperaturowych i w medycynie."
+        },
+        "Ac": {
+            mass: "227 u",
+            electronegativity: "1.1",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1050 °C",
+            boilingPoint: "3200 °C",
+            discoveryYear: "1899",
+            fact: "Aktyn to stosowany w produkcji urządzeń pomiarowych i jako materiał w detektorach cząstek."
+        },
+        "Th": {
+            mass: "232.04 u",
+            electronegativity: "1.3",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1750 °C",
+            boilingPoint: "4790 °C",
+            discoveryYear: "1828",
+            fact: "Tor to stosowany w produkcji paliw jądrowych i jako materiał w kontrolowanych reaktorach jądrowych."
+        },
+        "Pa": {
+            mass: "231.04 u",
+            electronegativity: "1.5",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1570 °C",
+            boilingPoint: "4700 °C",
+            discoveryYear: "1913",
+            fact: "Prot to stosowany w produkcji paliw jądrowych i w medycynie jako źródło promieniowania alfa."
+        },
+        "U": {
+            mass: "238.03 u",
+            electronegativity: "1.38",
+            occurrence: "Rzadki",
+            state: "Ciało stałe",
+            meltingPoint: "1132.2 °C",
+            boilingPoint: "4131 °C",
+            discoveryYear: "1789",
+            fact: "Uran to stosowany jako paliwo w reaktorach jądrowych i w produkcji broni jądrowej."
+        },
+        "Np": {
+            mass: "237 u",
+            electronegativity: "1.36",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "640 °C",
+            boilingPoint: "3902 °C",
+            discoveryYear: "1940",
+            fact: "Neptun to pierwiastek, który jest rzadko spotykany w przyrodzie, ale ważny w produkcji paliw jądrowych."
+        },
+        "Pu": {
+            mass: "244 u",
+            electronegativity: "1.28",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "640 °C",
+            boilingPoint: "3228 °C",
+            discoveryYear: "1940",
+            fact: "Pluton jest wykorzystywany w produkcji broni jądrowej i jako paliwo w reaktorach jądrowych."
+        },
+        "Am": {
+            mass: "243 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "1176 °C",
+            boilingPoint: "2607 °C",
+            discoveryYear: "1944",
+            fact: "Ameryk to stosowany w detektorach dymu i jako źródło promieniowania w diagnostyce medycznej."
+        },
+        "Cm": {
+            mass: "247 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "1340 °C",
+            boilingPoint: "3110 °C",
+            discoveryYear: "1944",
+            fact: "Kurium to pierwiastek stosowany w urządzeniach pomiarowych i jako źródło promieniowania w radioterapii."
+        },
+        "Bk": {
+            mass: "247 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "986 °C",
+            boilingPoint: "2900 °C",
+            discoveryYear: "1949",
+            fact: "Berkel to pierwiastek stosowany w detektorach metalu i jako źródło promieniowania w medycynie nuklearnej."
+        },
+        "Cf": {
+            mass: "251 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "900 °C",
+            boilingPoint: "1472 °C",
+            discoveryYear: "1950",
+            fact: "Kaliforn jest stosowany w detektorach metali i jako źródło promieniowania w medycynie jądrowej."
+        },
+        "Es": {
+            mass: "252 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "822 °C",
+            boilingPoint: "1287 °C",
+            discoveryYear: "1952",
+            fact: "Einstenia to stosowany w detektorach metali i jako źródło promieniowania w terapii i diagnostyce."
+        },
+        "Fm": {
+            mass: "257 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "1527 °C",
+            boilingPoint: "1871 °C",
+            discoveryYear: "1952",
+            fact: "Ferm to stosowany w produkcji"
+         },
+        "Md": {
+            mass: "258 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "827 °C",
+            boilingPoint: "no data",
+            discoveryYear: "1955",
+            fact: "Pierwiastek sztuczny, otrzymany w 1955 roku przez grupę naukowców."
+        },
+        "No": {
+            mass: "259 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "no data",
+            boilingPoint: "no data",
+            discoveryYear: "1966",
+            fact: "Pierwiastek sztuczny, otrzymany w 1966 roku przez grupę naukowców."
+        },
+        "Lr": {
+            mass: "262 u",
+            electronegativity: "1.3",
+            occurrence: "Sztuczny",
+            state: "Ciało stałe",
+            meltingPoint: "no data",
+            boilingPoint: "no data",
+            discoveryYear: "1961",
+            fact: "Pierwiastek sztuczny, otrzymany w 1961 roku przez grupę naukowców."
+        }
+        // Add more elements as needed
+    };
+    
+    // Lista symboli pierwiastków z numerami atomowymi
+const atomicNumbers = [
+    { symbol: "H", number: 1, name: "Wodór" },
+    { symbol: "He", number: 2, name: "Hel" },
+    { symbol: "Li", number: 3, name: "Lit" },
+    { symbol: "Be", number: 4, name: "Beryl" },
+    { symbol: "B", number: 5, name: "Bor" },
+    { symbol: "C", number: 6, name: "Węgiel" },
+    { symbol: "N", number: 7, name: "Azot" },
+    { symbol: "O", number: 8, name: "Tlen" },
+    { symbol: "F", number: 9, name: "Fluor" },
+    { symbol: "Ne", number: 10, name: "Neon" },
+    { symbol: "Na", number: 11, name: "Sód" },
+    { symbol: "Mg", number: 12, name: "Magnez" },
+    { symbol: "Al", number: 13, name: "Glin" },
+    { symbol: "Si", number: 14, name: "Krzem" },
+    { symbol: "P", number: 15, name: "Fosfor" },
+    { symbol: "S", number: 16, name: "Siarka" },
+    { symbol: "Cl", number: 17, name: "Chlor" },
+    { symbol: "Ar", number: 18, name: "Argon" },
+    { symbol: "K", number: 19, name: "Potas" },
+    { symbol: "Ca", number: 20, name: "Wapń" },
+    { symbol: "Sc", number: 21, name: "Skand" },
+    { symbol: "Ti", number: 22, name: "Tytan" },
+    { symbol: "V", number: 23, name: "Wanad" },
+    { symbol: "Cr", number: 24, name: "Chrom" },
+    { symbol: "Mn", number: 25, name: "Mangan" },
+    { symbol: "Fe", number: 26, name: "Żelazo" },
+    { symbol: "Co", number: 27, name: "Kobalt" },
+    { symbol: "Ni", number: 28, name: "Nikiel" },
+    { symbol: "Cu", number: 29, name: "Miedź" },
+    { symbol: "Zn", number: 30, name: "Cynk" },
+    { symbol: "Ga", number: 31, name: "Gal" },
+    { symbol: "Ge", number: 32, name: "German" },
+    { symbol: "As", number: 33, name: "Arsen" },
+    { symbol: "Se", number: 34, name: "Selen" },
+    { symbol: "Br", number: 35, name: "Brom" },
+    { symbol: "Kr", number: 36, name: "Krypton" },
+    { symbol: "Rb", number: 37, name: "Rubid" },
+    { symbol: "Sr", number: 38, name: "Stront" },
+    { symbol: "Y", number: 39, name: "Itr" },
+    { symbol: "Zr", number: 40, name: "Cyrkon" },
+    { symbol: "Nb", number: 41, name: "Niob" },
+    { symbol: "Mo", number: 42, name: "Molibden" },
+    { symbol: "Tc", number: 43, name: "Technet" },
+    { symbol: "Ru", number: 44, name: "Ruten" },
+    { symbol: "Rh", number: 45, name: "Rod" },
+    { symbol: "Pd", number: 46, name: "Pallad" },
+    { symbol: "Ag", number: 47, name: "Srebro" },
+    { symbol: "Cd", number: 48, name: "Kadm" },
+    { symbol: "In", number: 49, name: "Ind" },
+    { symbol: "Sn", number: 50, name: "Cyna" },
+    { symbol: "Sb", number: 51, name: "Antymon" },
+    { symbol: "Te", number: 52, name: "Tellur" },
+    { symbol: "I", number: 53, name: "Jod" },
+    { symbol: "Xe", number: 54, name: "Ksenon" },
+    { symbol: "Cs", number: 55, name: "Cez" },
+    { symbol: "Ba", number: 56, name: "Bar" },
+    { symbol: "La", number: 57, name: "Lantan" },
+    { symbol: "Ce", number: 58, name: "Cer" },
+    { symbol: "Pr", number: 59, name: "Prazeodym" },
+    { symbol: "Nd", number: 60, name: "Neodym" },
+    { symbol: "Pm", number: 61, name: "Promet" },
+    { symbol: "Sm", number: 62, name: "Samar" },
+    { symbol: "Eu", number: 63, name: "Europ" },
+    { symbol: "Gd", number: 64, name: "Gadolin" },
+    { symbol: "Tb", number: 65, name: "Terb" },
+    { symbol: "Dy", number: 66, name: "Dysproz" },
+    { symbol: "Ho", number: 67, name: "Holm" },
+    { symbol: "Er", number: 68, name: "Erb" },
+    { symbol: "Tm", number: 69, name: "Tul" },
+    { symbol: "Yb", number: 70, name: "Iterb" },
+    { symbol: "Lu", number: 71, name: "Lutet" },
+    { symbol: "Hf", number: 72, name: "Hafn" },
+    { symbol: "Ta", number: 73, name: "Tantal" },
+    { symbol: "W", number: 74, name: "Wolfram" },
+    { symbol: "Re", number: 75, name: "Ren" },
+    { symbol: "Os", number: 76, name: "Osm" },
+    { symbol: "Ir", number: 77, name: "Iryd" },
+    { symbol: "Pt", number: 78, name: "Platyna" },
+    { symbol: "Au", number: 79, name: "Złoto" },
+    { symbol: "Hg", number: 80, name: "Rtęć" },
+    { symbol: "Tl", number: 81, name: "Tal" },
+    { symbol: "Pb", number: 82, name: "Ołów" },
+    { symbol: "Bi", number: 83, name: "Bizmut" },
+    { symbol: "Po", number: 84, name: "Polon" },
+    { symbol: "At", number: 85, name: "Astat" },
+    { symbol: "Rn", number: 86, name: "Radon" },
+    { symbol: "Fr", number: 87, name: "Frans" },
+    { symbol: "Ra", number: 88, name: "Rad" },
+    { symbol: "Ac", number: 89, name: "Aktyn" },
+    { symbol: "Th", number: 90, name: "Tor" },
+    { symbol: "Pa", number: 91, name: "Protaktyn" },
+    { symbol: "U", number: 92, name: "Uran" },
+    { symbol: "Np", number: 93, name: "Neptun" },
+    { symbol: "Pu", number: 94, name: "Pluton" },
+    { symbol: "Am", number: 95, name: "Ameryk" },
+    { symbol: "Cm", number: 96, name: "Kiur" },
+    { symbol: "Bk", number: 97, name: "Berkel" },
+    { symbol: "Cf", number: 98, name: "Kaliforn" },
+    { symbol: "Es", number: 99, name: "Einstein" },
+    { symbol: "Fm", number: 100, name: "Ferm" },
+    { symbol: "Md", number: 101, name: "Mendelew" },
+    { symbol: "No", number: 102, name: "Nobel" },
+    { symbol: "Lr", number: 103, name: "Lorentz" },
+    { symbol: "Rf", number: 104, name: "Rutherford" },
+    { symbol: "Db", number: 105, name: "Dubn" },
+    { symbol: "Sg", number: 106, name: "Seaborg" },
+    { symbol: "Bh", number: 107, name: "Bohr" },
+    { symbol: "Hs", number: 108, name: "Has" },
+    { symbol: "Mt", number: 109, name: "Meitner" },
+    { symbol: "Ds", number: 110, name: "Darmstadt" },
+    { symbol: "Rg", number: 111, name: "Roentgen" },
+    { symbol: "Cn", number: 112, name: "Kopernik" },
+    { symbol: "Nh", number: 113, name: "Nihon" },
+    { symbol: "Fl", number: 114, name: "Flerow" },
+    { symbol: "Mc", number: 115, name: "Moskow" },
+    { symbol: "Lv", number: 116, name: "Liwermor" },
+    { symbol: "Ts", number: 117, name: "Tenes" },
+    { symbol: "Og", number: 118, name: "Oganeson" }
+];
+
+
+// Funkcja do przypisania numerów atomowych
+function assignAtomicNumbers(elements, atomicNumbers) {
+    atomicNumbers.forEach(item => {
+        if (elements[item.symbol]) {
+            elements[item.symbol].atomicNumber = item.number;
+        }
+    });
+}
+
+// Wywołanie funkcji
+assignAtomicNumbers(elements, atomicNumbers);
+
+// Funkcja do przypisania nazw do istniejących pierwiastków
+function assignElementNames() {
+    atomicNumbers.forEach(element => {
+        if (elements[element.symbol]) {
+            elements[element.symbol].name = element.name;
+        }
+    });
+}
+
+// Wywołanie funkcji
+assignElementNames();
+
+
+// Funkcja do przypisania radioaktywności
+function assignRadioactivity(elements) {
+    for (const symbol in elements) {
+        if (elements.hasOwnProperty(symbol)) {
+            const element = elements[symbol];
+            // Dodanie technetu jako wyjątku
+            element.radioactive = element.atomicNumber > 83 || element.atomicNumber === 43 || element.atomicNumber === 61;
+        }
+    }
+}
+
+// Wywołanie funkcji
+assignRadioactivity(elements);
+
+    function showDetails(element) {
+    const details = elements[element];
+    if (details) {
+        document.getElementById('mass').textContent = details.mass;
+        document.getElementById('electronegativity').textContent = details.electronegativity;
+        document.getElementById('occurrence').textContent = details.occurrence;
+        document.getElementById('state').textContent = details.state;
+        document.getElementById('meltingPoint').textContent = details.meltingPoint;
+        document.getElementById('boilingPoint').textContent = details.boilingPoint;
+        document.getElementById('discoveryYear').textContent = details.discoveryYear;
+        document.getElementById('fact').textContent = details.fact;
+        document.getElementById('atomicNumber').textContent = details.atomicNumber; 
+        document.getElementById('name').textContent = details.name;
+
+        // Wyświetlanie symbolu radioaktywności
+        if (details.radioactive) {
+            document.getElementById('radioactive-symbol').style.display = 'block';
+        } else {
+            document.getElementById('radioactive-symbol').style.display = 'none';
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
