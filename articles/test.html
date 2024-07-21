@@ -34,7 +34,7 @@
         <input type="password" id="password" placeholder="Wprowadź hasło">
         <button id="unlockButton">Odszyfruj i Wyświetl PDF</button>
     </div>
-    <div id="pdfViewer" data-pdf-url="abc.pdf.encrypted" style="display: none;"></div>
+    <div id="pdfViewer" data-pdf-url="ścieżka/do/pliku.encrypted" style="display: none;"></div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -47,10 +47,12 @@
             // Funkcja odszyfrowująca plik
             function decryptPdf(url, password) {
                 return fetch(url)
-                    .then(response => response.text())
-                    .then(encryptedContent => {
+                    .then(response => response.arrayBuffer())
+                    .then(buffer => {
                         // Odszyfrowanie zawartości
-                        var decrypted = CryptoJS.AES.decrypt(encryptedContent, password);
+                        var encrypted = new Uint8Array(buffer);
+                        var encryptedStr = Array.from(encrypted).map(byte => String.fromCharCode(byte)).join('');
+                        var decrypted = CryptoJS.AES.decrypt(encryptedStr, password);
                         var decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
 
                         // Konwersja z powrotem do ArrayBuffer
